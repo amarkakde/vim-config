@@ -10,10 +10,10 @@ set nobackup
 set hlsearch
 
 " auto close paranthesis, brackets, braces
-
 inoremap ( ()<Esc>i
 inoremap [ []<Esc>i
 inoremap { {}<Esc>i
+inoremap < <><Esc>i
 inoremap ' ''<Esc>i
 inoremap " ""<Esc>i
 
