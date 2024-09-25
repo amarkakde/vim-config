@@ -21,6 +21,22 @@ keymap.set("n", "<leader>sm", ":MaximizerToggle<CR>", opts) --Toggle Minimize
 keymap.set("v", "<", "<gv")
 keymap.set("v", ">", ">gv")
 
+-- clear highlight on search
+keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
 -- comments
 keymap.set("n", "<C-/>", "gcc", opts)
 keymap.set("v", "<C-/>", "gcc", opts)
+
+-- Highlight when yanking (copying) text
+--  Try it with `yap` in normal mode
+--  See `:help vim.highlight.on_yank()`
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})
+
+

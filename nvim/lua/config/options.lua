@@ -36,6 +36,10 @@ opt.splitbelow = true
 opt.autochdir = false
 opt.iskeyword:append("-")
 opt.mouse:append("a")
-opt.clipboard:append("unnamedplus")
+vim.schedule( function()
+    opt.clipboard = "unnamedplus"
+end)
 opt.modifiable = true
 opt.encoding = "utf-8"
+opt.inccommand = 'split'
+opt.updatetime = 250
