@@ -3,6 +3,8 @@ local keymap = vim.keymap
 local opts = {noremap = true, silent = true }
 -- Directory navigation
 keymap.set("n", "<leader>e", ":Neotree filesystem toggle<CR>", opts)
+-- map 'o' to focus neotree
+keymap.set("n", "<leader>o", ":Neotree focus<CR>", {desc = "NeoTree Focus"})
 
 -- Pane navigation
 keymap.set("n", "<C-h>", "<C-w>h", opts) -- navigate to left
