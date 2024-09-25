@@ -4,7 +4,7 @@
 FILE = "$1"
 
 # Determine the session name based on the argument provided
-if [ -z "$FILE"]; then
+if [ -z "$FILE" ]; then
     # no file provided use the current folder name
     SESSION=$(basename "$PWD")
 else
@@ -14,7 +14,7 @@ fi
 
 # start a new tmux session if one does not exists
 if ! tmux has-session -t $SESSION 2>/dev/null; then
-    if [-z "$FILE"]; then
+    if [ -z "$FILE" ]; then
         # no file provided, start nvim in the current dir
         tmux new-session -d -s $SESSION -n editor "nvim"
     else
