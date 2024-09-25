@@ -25,6 +25,9 @@ if ! tmux has-session -t $SESSION 2>/dev/null; then
     # create a second window runnig a normal shell (terminal)
     tmux new-window -t $SESSION -n terminal
 
+    # switch back to nvim window
+    tmux select-window -t $SESSION:0
+
     # Attach to the tmux session
     tmux attach-session -t $SESSION
 else
