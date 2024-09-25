@@ -17,7 +17,12 @@ return {
                     leave_dirs_open = false, -- 'false' closes auto exapanded dir
                 }, -- update the focused file in neotree
                 hijack_netrw_behaviour = "open_default", -- disbale netrw & use neo-tree for browsing
-            }, 
+                filtered_items = {
+                    visible = true,
+                    hide_dotfiles = false, --don't hide dot files
+                    hide_gitignored = false, -- show files ignored by git
+                },
+            },
         })
     end        
 }
