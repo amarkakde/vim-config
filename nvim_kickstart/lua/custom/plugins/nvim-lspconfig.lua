@@ -152,17 +152,63 @@ return {
     --  - settings (table): Override the default settings passed when initializing the server.
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
     local servers = {
-      clangd = {},
+      clangd = {
+        settings = {
+          clangd = {
+            diagnostics = {
+              enable = true,
+              onChange = true,
+            },
+            format = {
+              enable = true,
+            },
+          },
+        },
+      },
       -- gopls = {},
-      pyright = {},
-      rust_analyzer = {},
+      pyright = {
+        settings = {
+          python = {
+            analysis = {
+              typeCheckingMode = 'strict',
+              diagnosticMode = 'workspace',
+            },
+            formatting = {
+              provider = 'black',
+            },
+          },
+        },
+      },
+      rust_analyzer = {
+        settings = {
+          ['rust_analyzer'] = {
+            cargo = {
+              allFeatures = true,
+            },
+            diagnostics = {
+              enable = true,
+            },
+          },
+        },
+      },
       -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
       --
       -- Some languages (like typescript) have entire language plugins that can be useful:
       --    https://github.com/pmizio/typescript-tools.nvim
       --
       -- But for many setups, the LSP (`ts_ls`) will work just fine
-      ts_ls = {},
+      ts_ls = {
+        settings = {
+          tsserver = {
+            diagnostics = {
+              enable = true,
+            },
+            format = {
+              enable = true,
+            },
+          },
+        },
+      },
       --
 
       lua_ls = {
@@ -174,8 +220,18 @@ return {
             completion = {
               callSnippet = 'Replace',
             },
+            formatting = {
+              enable = true, -- Enable Lua formatting
+              defaultConfig = {
+                indent_style = 'space',
+                indent_size = '2',
+              },
+            },
             -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-            -- diagnostics = { disable = { 'missing-fields' } },
+            diagnostics = {
+              globals = { 'vim' },
+              disable = { 'missing-fields' },
+            },
           },
         },
       },
@@ -194,6 +250,9 @@ return {
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
       'stylua', -- Used to format Lua code
+      'black', -- Used to format python code
+      'eslint_d', -- Used to format typescript
+      'prettierd',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
